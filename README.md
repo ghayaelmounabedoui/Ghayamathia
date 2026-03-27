@@ -1,37 +1,58 @@
-# EduPortal – Plateforme éducative avec chatbot intelligent
+# EduPortal – Plateforme éducative avec assistant intelligent
 
 ## Présentation
 
-EduPortal est une plateforme éducative intégrant un assistant intelligent permettant d’accompagner les étudiants dans leur apprentissage.
+EduPortal est une plateforme éducative développée pour accompagner les élèves dans leur apprentissage, en combinant des ressources pédagogiques et un assistant intelligent.
 
-Le chatbot repose sur une approche combinant :
+Ce projet s’inscrit directement dans mon expérience en tant que tutrice en mathématiques chez Complétude, où j’ai pu observer les difficultés récurrentes des élèves : manque d’autonomie, incompréhension des notions, et besoin d’un accompagnement continu en dehors des séances.
 
-* la recherche d’information dans des documents (PDF)
-* la génération de réponses via un modèle d’intelligence artificielle
+L’objectif d’EduPortal est donc de proposer un outil capable de prolonger cet accompagnement de manière autonome, accessible à tout moment.
 
-L’objectif est de proposer des réponses pertinentes, contextualisées et naturelles.
+---
+
+## Idée du projet
+
+L’idée principale est de créer un assistant capable de répondre aux questions des élèves en s’appuyant sur :
+
+* des documents pédagogiques (cours, exercices, explications)
+* un modèle d’intelligence artificielle capable de compléter les réponses
+
+Cela permet de simuler un encadrement proche de celui d’un tutorat, tout en restant disponible 24h/24.
 
 ---
 
 ## Fonctionnalités
 
 * Recherche d’information à partir de documents pédagogiques
-* Génération de réponses intelligentes
-* Interface de chat simple et intuitive
-* Gestion des utilisateurs (enseignant / étudiant)
-* Gestion des annonces
+* Génération de réponses claires et adaptées au niveau de l’élève
+* Interface de discussion simple et intuitive
+* Gestion des utilisateurs (enseignants / étudiants)
+* Publication d’annonces pédagogiques
 
 ---
 
 ## Fonctionnement du chatbot
 
-Le système suit une logique simple :
+Le chatbot repose sur une logique hybride :
 
 1. Recherche dans les documents disponibles
 2. Si une information pertinente est trouvée → utilisation du contexte
-3. Sinon → génération de réponse via le modèle
+3. Sinon → génération d’une réponse via le modèle d’IA
 
-Ce mécanisme permet de limiter les réponses approximatives et d’améliorer la pertinence globale.
+Ce fonctionnement permet de garantir des réponses à la fois fiables et complètes.
+
+---
+
+## Apport par rapport à Complétude
+
+Ce projet constitue une extension directe de mon activité de tutrice :
+
+* Il permet de prolonger l’accompagnement entre les séances
+* Il répond aux questions immédiates des élèves sans attendre
+* Il favorise l’autonomie dans l’apprentissage
+* Il reproduit une logique pédagogique basée sur l’explication et non uniquement la réponse
+
+Ainsi, EduPortal agit comme un support complémentaire au tutorat traditionnel.
 
 ---
 
@@ -96,10 +117,10 @@ http://127.0.0.1:7000
 
 ## Perspectives
 
-* Amélioration de la pertinence des réponses
-* Ajout d’un système de mémoire conversationnelle
-* Optimisation du moteur de recherche documentaire
-* Déploiement cloud
+* Adaptation du niveau de réponse selon l’élève
+* Ajout d’un suivi personnalisé
+* Intégration d’exercices interactifs
+* Amélioration du moteur de recherche documentaire
 
 ---
 

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Profil{% endblock %}
+{% block content %}
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">E</div>EduPortal</div>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/resources">Ressources</a>
+    <a href="/announcements">Annonces</a>
+    <a class="active" href="/profile">Profil</a>
+    <a href="/logout">Déconnexion</a>
+  </aside>
+  <main class="main">
+    <div class="topbar"><div><h1>Profil</h1><p class="muted">Informations du compte connecté.</p></div></div>
+    <div class="card">
+      <div class="list-item"><strong>Prénom</strong><div class="muted small">{{ user.first_name }}</div></div>
+      <div class="list-item"><strong>Nom</strong><div class="muted small">{{ user.last_name }}</div></div>
+      <div class="list-item"><strong>Nom d'utilisateur</strong><div class="muted small">{{ user.username }}</div></div>
+      <div class="list-item"><strong>Email</strong><div class="muted small">{{ user.email }}</div></div>
+      <div class="list-item"><strong>Rôle</strong><div class="muted small">{{ user.role }}</div></div>
+    </div>
+  </main>
+</div>
+{% endblock %}

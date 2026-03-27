@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block title %}Projets — GhayaMathia{% endblock %}
+
+{% block content %}
+
+<nav class="nav">
+  <div class="brand">
+    <div class="logo">G</div>GhayaMathia
+  </div>
+
+  <div style="display:flex;gap:10px">
+    <a class="btn" href="/">Accueil</a>
+    <a class="btn" href="/about">À propos</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<h1>🚀 Projets & Engagements</h1>
+
+<p class="muted intro-text">
+Découvrez quelques projets et expériences qui reflètent mon parcours.
+</p>
+
+<div class="project-list">
+
+  <!-- GHAYAMATHIA -->
+  <div class="project-card">
+
+    <img src="/static/images/ghayamathia.jpg" class="project-img">
+
+    <div class="project-content">
+
+      <h3>📚 GhayaMathia</h3>
+
+      <p>
+        Plateforme éducative combinant intelligence artificielle et pédagogie pour accompagner les élèves.
+      </p>
+
+      <p class="muted small">
+        FastAPI · SQL · IA · Python
+      </p>
+
+      <div class="project-actions">
+        <a href="#" class="btn small-btn">Voir projet</a>
+        <a href="#" class="btn small-btn">GitHub</a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="project-card">
+
+  <!-- LOGO -->
+  <img src="/static/images/completude_logo1.png" class="project-img">
+
+  <div class="project-content">
+
+    <h3>👩‍🏫 Tutrice en Mathématiques — Complétude</h3>
+
+    <p>
+      Accompagnement de plus de 25 élèves avec amélioration significative des résultats.
+    </p>
+
+    <p class="muted small">
+      Pédagogie · Coaching · Mathématiques
+    </p>
+
+    <!-- SECTION TEMOIGNAGES -->
+    <div class="feedback-section">
+
+      <!-- FEEDBACK 1 -->
+      <div class="feedback-item">
+        <img src="/static/images/feedback 4.jpeg" onclick="openModal(this.src)">
+
+        
+      </div>
+
+      <!-- FEEDBACK 2 -->
+      <div class="feedback-item">
+        <img src="/static/images/feedback2.jpeg" onclick="openModal(this.src)">
+
+        
+      </div>
+
+      <!-- FEEDBACK 3 -->
+      <div class="feedback-item">
+        <img src="/static/images/feedback3.jpeg" onclick="openModal(this.src)">
+
+        
+      </div>
+      <!-- FEEDBACK 3 -->
+      <div class="feedback-item">
+        <img src="/static/images/feedback1.jpeg" onclick="openModal(this.src)">
+
+        
+      </div>
+      <!-- FEEDBACK 3 -->
+      <div class="feedback-item">
+        <img src="/static/images/feedback5.jpeg" onclick="openModal(this.src)">
+
+        
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+  <!-- AIESEC -->
+  <div class="project-card">
+
+    <img src="/static/images/aiesec_logo.jpg" class="project-img">
+
+    <div class="project-content">
+
+      <h3>🌍 AIESEC</h3>
+
+      <p>
+        Engagement associatif international, leadership et gestion d’équipe.
+      </p>
+
+      <p class="muted small">
+        Leadership · Communication · Teamwork
+      </p>
+
+      <div class="project-gallery">
+        <img src="/static/images/AIESEC.jpg" onclick="openModal(this.src)">
+        <img src="/static/images/aiesec2.jpg" onclick="openModal(this.src)">
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ENIT JUNIOR -->
+  <div class="project-card">
+
+    <img src="/static/images/enit_junior_logo.png" class="project-img">
+
+    <div class="project-content">
+
+      <h3>🏢 ENIT Junior Entreprise</h3>
+
+      <p>
+        Participation à des projets étudiants en ingénierie et analyse.
+      </p>
+
+      <p class="muted small">
+        Analyse · Gestion de projet · Data
+      </p>
+
+      <div class="project-gallery">
+        <img src="/static/images/junior.jpg" onclick="openModal(this.src)">
+        <img src="/static/images/junior2.jpg" onclick="openModal(this.src)">
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<!-- MODAL IMAGE -->
+<div id="imgModal" class="modal" onclick="closeModal()">
+  <img id="modalImg">
+</div>
+
+<script>
+function openModal(src){
+  document.getElementById("imgModal").style.display="flex";
+  document.getElementById("modalImg").src = src;
+}
+
+function closeModal(){
+  document.getElementById("imgModal").style.display="none";
+}
+</script>
+
+{% endblock %}

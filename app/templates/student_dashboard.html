@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard étudiant{% endblock %}
+
+{% block content %}
+
+<!-- NAVBAR -->
+<nav class="nav-pro">
+
+  <div class="nav-left">
+    <div class="logo">E</div>
+    <span class="brand-name">EduPortal</span>
+  </div>
+
+  <div class="nav-links">
+    <a href="/dashboard" class="nav-item active">🏠 Accueil</a>
+    <a href="/resources" class="nav-item">📚 Ressources</a>
+    <a href="/announcements" class="nav-item">📢 Annonces</a>
+    <a href="/profile" class="nav-item">👤 Profil</a>
+    <a href="/chatbot" class="nav-item">🤖 Chatbot</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/logout" class="btn-logout">Déconnexion</a>
+  </div>
+
+</nav>
+
+<div class="dashboard-container">
+
+  <!-- HEADER -->
+  <div class="topbar">
+    <div>
+      <h1>👋 Bonjour {{ user.first_name }}</h1>
+      <p class="muted">
+        Accède à tes ressources, annonces et outils intelligents.
+      </p>
+    </div>
+
+    <a class="btn btn-primary" href="/resources">
+      📚 Explorer les ressources
+    </a>
+  </div>
+
+  <!-- STATS CARDS -->
+  <div class="grid grid-3">
+
+    <a href="/resources" class="card card-click">
+      <div class="icon">📚</div>
+      <div class="muted">Ressources</div>
+      <div class="stat">{{ counts.resources if counts else 0 }}</div>
+    </a>
+
+    <a href="/announcements" class="card card-click">
+      <div class="icon">📢</div>
+      <div class="muted">Annonces</div>
+      <div class="stat">{{ counts.announcements if counts else 0 }}</div>
+    </a>
+
+    <a href="/profile" class="card card-click">
+      <div class="icon">👨‍🏫</div>
+      <div class="muted">Enseignants</div>
+      <div class="stat">{{ counts.teachers if counts else 0 }}</div>
+    </a>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="split">
+
+    <!-- RESSOURCES -->
+    <section class="card">
+      <h3>📚 Dernières ressources</h3>
+
+      {% if resources %}
+        {% for r in resources %}
+          <div class="list-item">
+            <strong>{{ r.title }}</strong>
+            <div class="muted small">
+              {{ r.category }} — {{ r.description }}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="muted">Aucune ressource disponible</p>
+      {% endif %}
+
+    </section>
+
+    <!-- ANNOUNCEMENTS -->
+    <section class="card">
+      <h3>📢 Annonces</h3>
+
+      {% if announcements %}
+        {% for a in announcements %}
+          <div class="list-item">
+            <strong>{{ a.title }}</strong>
+            <div class="muted small">
+              {{ a.content }}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="muted">Aucune annonce pour le moment</p>
+      {% endif %}
+
+    </section>
+
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}Accueil — GhayaMathia{% endblock %}
+
+{% block content %}
+
+<nav class="nav">
+  <div class="brand">
+    <div class="logo">G</div>GhayaMathia
+  </div>
+
+  <div style="display:flex;gap:10px">
+    <a class="btn" href="/login">Connexion</a>
+    <a class="btn btn-primary" href="/register">Inscription</a>
+    <a class="btn" href="/about">À propos</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-card">
+
+    <h1>
+      Apprendre intelligemment avec l’intelligence artificielle
+    </h1>
+
+    <p class="muted" style="margin-top:15px">
+      EduPortal est une plateforme éducative intelligente qui combine ressources pédagogiques,
+      intelligence artificielle et accompagnement personnalisé pour optimiser l’apprentissage.
+    </p>
+
+    <div style="margin-top:25px;display:flex;gap:15px">
+      <a href="/register" class="btn btn-primary">🚀 Commencer</a>
+      <a href="/chatbot" class="btn">🤖 Tester l’IA</a>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="features">
+
+  <div class="card">
+    <h3>📚 Ressources pédagogiques</h3>
+    <p class="muted">
+      Accédez à des contenus organisés et adaptés à votre niveau.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>🤖 Assistant IA</h3>
+    <p class="muted">
+      Posez vos questions et obtenez des réponses intelligentes instantanément.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>📊 Suivi d’apprentissage</h3>
+    <p class="muted">
+      Analysez votre progression et améliorez vos performances.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>👩‍🏫 Encadrement</h3>
+    <p class="muted">
+      Interaction entre enseignants et étudiants pour un meilleur suivi.
+    </p>
+  </div>
+
+</section>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Annonces{% endblock %}
+
+{% block content %}
+
+<!-- NAVBAR -->
+<nav class="nav-pro">
+
+  <div class="nav-left">
+    <div class="logo">E</div>
+    <span class="brand-name">EduPortal</span>
+  </div>
+
+  <div class="nav-links">
+    <a href="/dashboard" class="nav-item">🏠 Dashboard</a>
+    <a href="/resources" class="nav-item">📚 Ressources</a>
+    <a href="/announcements" class="nav-item active">📢 Annonces</a>
+    <a href="/profile" class="nav-item">👤 Profil</a>
+  </div>
+
+  <a href="/logout" class="btn-logout">Déconnexion</a>
+
+</nav>
+
+<div class="dashboard-container">
+
+  <!-- HEADER -->
+  <div class="topbar">
+    <div>
+      <h1>📢 Annonces</h1>
+      <p class="muted">
+        Toutes les communications importantes de la plateforme.
+      </p>
+    </div>
+  </div>
+
+  <!-- LIST -->
+  <div class="announcements-list">
+
+    {% if announcements %}
+
+      {% for a in announcements %}
+      <div class="announcement-card">
+
+        <div class="announcement-header">
+          <span class="announcement-icon">📢</span>
+          <h3>{{ a.title }}</h3>
+        </div>
+
+        <p class="muted">
+          {{ a.content }}
+        </p>
+
+      </div>
+      {% endfor %}
+
+    {% else %}
+      <div class="card">
+        <p class="muted">Aucune annonce disponible pour le moment.</p>
+      </div>
+    {% endif %}
+
+  </div>
+
+</div>
+
+{% endblock %}

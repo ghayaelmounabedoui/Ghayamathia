@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% block title %}Ressources{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="topbar">
+    <h1>📚 Ressources</h1>
+    <p class="muted">Gère tes fichiers pédagogiques</p>
+  </div>
+
+  <!-- FORM -->
+  {% if user.role == "teacher" %}
+  <section class="card form-card">
+    <h3>📤 Ajouter une ressource</h3>
+
+    <form method="post" action="/resources/add" enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label>Attribuer à</label>
+        <select name="target" id="targetSelect">
+          <option value="all">Tous les élèves</option>
+          <option value="student">Un élève</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="studentField" style="display:none;">
+        <label>Élève</label>
+        <select name="student_id">
+          {% for s in students %}
+          <option value="{{ s.id }}">{{ s.first_name }} {{ s.last_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <input name="title" placeholder="Titre" required>
+      <input name="category" placeholder="Catégorie" required>
+      <textarea name="description" placeholder="Description" required></textarea>
+
+      <!-- DRAG & DROP -->
+      <div id="dropZone" class="drop-zone">
+        📂 Glisse ou clique
+        <input type="file" name="file" id="fileInput" hidden>
+        <p id="fileName"></p>
+      </div>
+
+      <button class="btn">Ajouter</button>
+    </form>
+  </section>
+  {% endif %}
+
+  <!-- LIST -->
+  <div class="grid">
+
+    {% for r in resources %}
+    <div class="resource-card">
+
+      <h4>{{ r.title }}</h4>
+      <p class="muted">{{ r.category }}</p>
+      <p>{{ r.description }}</p>
+
+      <div class="actions">
+
+        {% if r.file_path %}
+        <button onclick="preview('{{ r.file_path }}')">👁️</button>
+        <a href="/uploads/{{ r.file_path }}" target="_blank">📎</a>
+        {% endif %}
+
+        {% if user.role == "teacher" %}
+
+        <button 
+  onclick='edit({{ r.id }}, "{{ r.title | escape }}", "{{ r.category | escape }}", "{{ r.description | escape }}")'>
+  ✏️
+</button>
+
+        <form method="post" action="/resources/delete/{{ r.id }}">
+          <button type="submit" onclick="return confirm('Supprimer ?')">🗑️</button>
+        </form>
+
+        {% endif %}
+
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+<!-- MODAL PDF -->
+<div id="modal" class="modal">
+  <div class="modal-box">
+    <span onclick="closeModal()">✖</span>
+    <iframe id="viewer"></iframe>
+  </div>
+</div>
+
+<!-- MODAL EDIT -->
+<div id="editModal" class="modal">
+  <div class="modal-box">
+    <form id="editForm" method="post">
+      <input name="title" id="eTitle">
+      <input name="category" id="eCat">
+      <textarea name="description" id="eDesc"></textarea>
+      <button>💾 Save</button>
+    </form>
+  </div>
+</div>
+
+<script>
+
+// 🔥 TARGET SELECT
+document.getElementById("targetSelect")?.addEventListener("change", function(){
+  document.getElementById("studentField").style.display =
+    this.value === "student" ? "block" : "none";
+});
+
+
+// 🔥 PREVIEW PDF
+function preview(file){
+  document.getElementById("viewer").src="/uploads/"+file;
+  document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+
+
+// 🔥 EDIT MODAL
+function edit(id,title,category,description){
+  document.getElementById("editForm").action="/resources/update/"+id;
+  document.getElementById("eTitle").value=title;
+  document.getElementById("eCat").value=category;
+  document.getElementById("eDesc").value=description;
+
+  document.getElementById("editModal").style.display="flex";
+}
+
+
+// 🔥 DRAG & DROP
+const dropZone=document.getElementById("dropZone");
+const input=document.getElementById("fileInput");
+
+if(dropZone){
+  dropZone.onclick=()=>input.click();
+
+  dropZone.addEventListener("dragover",e=>{
+    e.preventDefault();
+    dropZone.style.borderColor="green";
+  });
+
+  dropZone.addEventListener("drop",e=>{
+    e.preventDefault();
+    input.files=e.dataTransfer.files;
+    document.getElementById("fileName").innerText=input.files[0].name;
+  });
+
+  input.addEventListener("change",()=>{
+    if(input.files.length>0){
+      document.getElementById("fileName").innerText=input.files[0].name;
+    }
+  });
+}
+
+</script>
+
+{% endblock %}

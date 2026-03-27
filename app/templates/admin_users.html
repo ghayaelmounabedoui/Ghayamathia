@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">E</div>EduPortal
+    </div>
+
+    <p class="muted small">
+      Admin : {{ user.first_name }} {{ user.last_name }}
+    </p>
+
+    <a href="/dashboard">Dashboard</a>
+    <a href="/resources">Ressources</a>
+    <a href="/announcements">Annonces</a>
+    <a class="active" href="/admin/users">Utilisateurs</a>
+    <a href="/profile">Profil</a>
+    <a href="/logout">Déconnexion</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <div class="topbar">
+      <div>
+        <h1>Gestion des utilisateurs</h1>
+        <p class="muted">Valider ou refuser les inscriptions</p>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="card" style="margin-top:20px">
+
+      <table style="width:100%; border-collapse: collapse">
+
+        <thead>
+          <tr style="text-align:left; border-bottom:1px solid #ddd">
+            <th style="padding:10px">Nom</th>
+            <th>Email</th>
+            <th>Rôle</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          {% for u in users %}
+          <tr style="border-bottom:1px solid #eee">
+
+            <td style="padding:10px">
+              {{ u.first_name }} {{ u.last_name }}
+            </td>
+
+            <td>{{ u.email }}</td>
+
+            <td>
+              <span class="tag">
+                {{ u.role }}
+              </span>
+            </td>
+
+            <td>
+              {% if u.is_approved %}
+                <span style="color:green">✔ Validé</span>
+              {% else %}
+                <span style="color:orange">⏳ En attente</span>
+              {% endif %}
+            </td>
+
+            <td>
+
+              {% if not u.is_approved %}
+
+              <!-- APPROVE -->
+              <form method="post" action="/admin/users/{{ u.id }}/approve" style="display:inline;">
+                <button class="btn btn-success" type="submit">
+                  ✔ Approve
+                </button>
+              </form>
+
+              <!-- REJECT -->
+              <form method="post" action="/admin/users/{{ u.id }}/reject" style="display:inline;">
+                <button class="btn btn-danger" type="submit">
+                  ✖ Reject
+                </button>
+              </form>
+
+              {% else %}
+                <span class="muted">Aucune action</span>
+              {% endif %}
+
+            </td>
+
+          </tr>
+          {% endfor %}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </main>
+
+</div>
+
+{% endblock %}

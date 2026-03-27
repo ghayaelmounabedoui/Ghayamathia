@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard enseignant{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">E</div>
+      <span>EduPortal</span>
+    </div>
+
+    <p class="muted small">👤 {{ user.first_name }} {{ user.last_name }}</p>
+
+    <nav>
+      <a class="active" href="/dashboard">📊 Dashboard</a>
+      <a href="/resources">📚 Ressources</a>
+      <a href="/announcements">📢 Annonces</a>
+      <a href="/profile">👤 Profil</a>
+      <a href="/docs-info">⚙️ API / Docs</a>
+      <a href="/admin/users">👥 Utilisateurs</a>
+      <a href="/logout" class="logout">🚪 Déconnexion</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div>
+        <h1>Dashboard enseignant</h1>
+        <p class="muted">Bienvenue 👋 voici un aperçu de votre plateforme</p>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="/resources">+ Ressource</a>
+        <a class="btn btn-outline" href="/announcements">+ Annonce</a>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="grid grid-3">
+
+      <a href="/resources" class="card stat-card clickable">
+        <div class="icon">📚</div>
+        <div>
+          <div class="muted">Ressources</div>
+          <div class="stat">{{ counts.resources }}</div>
+        </div>
+      </a>
+
+      <a href="/announcements" class="card stat-card clickable">
+        <div class="icon">📢</div>
+        <div>
+          <div class="muted">Annonces</div>
+          <div class="stat">{{ counts.announcements }}</div>
+        </div>
+      </a>
+
+      <a href="/students" class="card stat-card clickable">
+        <div class="icon">🎓</div>
+        <div>
+          <div class="muted">Étudiants</div>
+          <div class="stat">{{ counts.students }}</div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="split">
+
+      <!-- ANNONCE -->
+      <section class="card form-card">
+        <h3>📢 Créer une annonce</h3>
+
+        <form method="post" action="/announcements/add">
+
+          <div class="form-group">
+            <label>Attribuer à</label>
+            <select name="target" id="targetSelect" onchange="toggleStudentSelect()">
+              <option value="all">Tous les élèves</option>
+              <option value="student">Un élève spécifique</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="studentField" style="display:none;">
+            <label>Choisir un élève</label>
+            <select name="student_id">
+              {% for s in students %}
+                <option value="{{ s.id }}">{{ s.first_name }} {{ s.last_name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Titre</label>
+            <input name="title" placeholder="Ex: Nouvelle séance de cours" required>
+          </div>
+
+          <div class="form-group">
+            <label>Contenu</label>
+            <textarea name="content" placeholder="Décris ton annonce ici..." required></textarea>
+          </div>
+
+          <button class="btn btn-primary">Publier</button>
+        </form>
+      </section>
+
+      <!-- RESSOURCE -->
+      <section class="card form-card">
+        <h3>📚 Ajouter une ressource</h3>
+
+        <div class="form-group">
+    <label>Fichier</label>
+    <input type="file" name="file">
+  </div>
+          <div class="form-group">
+            <label>Attribuer à</label>
+            <select name="target" id="targetSelect2" onchange="toggleStudentSelect2()">
+              <option value="all">Tous les élèves</option>
+              <option value="student">Un élève spécifique</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="studentField2" style="display:none;">
+            <label>Choisir un élève</label>
+            <select name="student_id">
+              {% for s in students %}
+                <option value="{{ s.id }}">{{ s.first_name }} {{ s.last_name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Titre</label>
+            <input name="title" placeholder="Ex: Cours Python" required>
+          </div>
+
+          <div class="form-group">
+            <label>Catégorie</label>
+            <input name="category" placeholder="Ex: Programmation" required>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" placeholder="Décris la ressource..." required></textarea>
+          </div>
+
+          <button class="btn btn-success">Ajouter</button>
+        </form>
+      </section>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- JS -->
+<script>
+function toggleStudentSelect() {
+  const value = document.getElementById("targetSelect").value;
+  document.getElementById("studentField").style.display =
+    value === "student" ? "block" : "none";
+}
+
+function toggleStudentSelect2() {
+  const value = document.getElementById("targetSelect2").value;
+  document.getElementById("studentField2").style.display =
+    value === "student" ? "block" : "none";
+}
+</script>
+
+{% endblock %}
